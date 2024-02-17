@@ -83,6 +83,13 @@ export const signin = async (req, res) => {
 }
 
 export const signout = (req, res) => {
-    console.log("signout")
+    try {
+        res.cookie("token", "", { maxAge: 0 })
+        res.status(200).json({
+            message: "Successfully Signed out"
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
 
