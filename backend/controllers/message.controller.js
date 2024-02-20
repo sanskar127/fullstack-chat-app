@@ -5,9 +5,8 @@ export const sendMessage = async (req, res) => {
     try {
         const { message } = req.body
         const { id: receiverId } = req.params
-        // const senderId = req.user._id
-        const senderId = "65d0a11b40be130af0d63906"
-        
+        const senderId = req.user._id
+
         let chat = await Chat.findOne({ participants: { $all: [senderId, receiverId] } })
 
         if (!chat) {
@@ -24,7 +23,26 @@ export const sendMessage = async (req, res) => {
             chat.message.push(newMessage._id)
         }
 
+        // using a promise
+        await Promise.all([chat.save(), newMessage.save()])
+
         res.status(201).json(newMessage)
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" })
+    }
+}
+
+export const receiveMessage = async (req, res) => {
+    try {
+        // const { id: userToChatId } = req.body
+        const senderId = req.user._id
+
+        console.log(req.user)
+        // const chat = await Chat.findOne({ 
+        //     participants: { $all: [senderId, userToChatId] } 
+        // }).populate("messages")
+
+        // res.status(200).send(chat)
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" })
     }
