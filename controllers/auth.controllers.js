@@ -5,15 +5,15 @@ import generateTokenAndSetCookie from "../utils/generateToken.js"
 
 export const signup = async (req, res) => {
     try {
-        const { fName, lName, uName, email, passwd, cnfrmPasswd, gender } = req.body
+        const { fullname, uname, passwd, cpasswd, gender } = req.body
 
-        if (passwd !== cnfrmPasswd) {
+        if (passwd !== cpasswd) {
             return res.status(400).json({
                 error: "Passwords do not match"
             })
         }
 
-        const user = await User.findOne({ uName }) || await User.findOne({ email })
+        const user = await User.findOne({ uname })
         if (user) {
             return res.status(400).json({
                 error: "User already exists"
@@ -25,14 +25,12 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(passwd, salt)
 
         // Profile Pictures
-        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${uName}`
-        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${uName}`
+        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${uname}`
+        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${uname}`
 
         const newUser = new User({
-            fName,
-            lName,
-            email,
-            uName,
+            fullname,
+            uname,
             passwd: hashedPassword,
             gender,
             profilePicture: gender === "male" ? boyProfilePic : girlProfilePic
@@ -45,9 +43,8 @@ export const signup = async (req, res) => {
 
         res.status(201).json({
             _id: newUser._id,
-            name: newUser.fName + " " + newUser.lName,
-            uName: newUser.uName,
-            email: newUser.email,
+            fullname: newUser.fullname,
+            uname: newUser.uname,
             profilePicture: newUser.profilePicture
         })
     }
@@ -59,22 +56,21 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
     try {
-        const { uName, passwd } = req.body
-        const user = await User.findOne({ uName })
+        const { uname, passwd } = req.body
+        const user = await User.findOne({ uname })
         const checkPasswd = await bcrypt.compare(passwd, user?.passwd || "")
 
-        if (!uName || !checkPasswd) {
+        if (!uname || !checkPasswd) {
             return res.status(400).json({
-                error: "Invalid Username/Email and Password"
+                error: "Invalid Username and Password"
             })
         }
 
         generateTokenAndSetCookie(user._id, res)
         res.status(200).json({
             _id: user._id,
-            name: user.fName + " " + user.lName,
-            uName: user.uName,
-            email: user.email,
+            fullname: user.fullname,
+            uname: user.uname,
             profilePicture: user.profilePicture
         })
     } catch (error) {

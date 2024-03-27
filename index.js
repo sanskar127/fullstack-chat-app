@@ -22,6 +22,11 @@ const PORT = process.env.PORT
 // Routes
 App.use('/api/auth', authRoutes)
 App.use('/api/message', messageRoutes)
+App.post('/api/test', (req, res) => {
+    const { message } = req.body
+    res.json({ message: message})
+    console.log(message)
+})
 
 // Starting Server
 App.listen(PORT, () => {
