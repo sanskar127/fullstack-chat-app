@@ -1,4 +1,4 @@
-import { IoMdSend } from "react-icons/io";
+import SendIcon from '@mui/icons-material/Send'
 
 const MessageInput = () => {
   return (
@@ -15,7 +15,7 @@ const MessageInput = () => {
           className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-200 focus:outline-none"
           aria-label="Send"
         >
-          <IoMdSend />
+          <SendIcon />
         </button>
       </div>
     </form>

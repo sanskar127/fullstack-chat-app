@@ -1,4 +1,4 @@
-import { MdOutlineNavigateNext } from "react-icons/md"
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 const Conversation = () => {
   return (
@@ -11,7 +11,7 @@ const Conversation = () => {
       <div className="flex flex-col flex-1">
         <div className="flex gap-3 justify-between">
           <p className="font-bold text-gray-200">John Doe</p>
-          <span className="text-xl"> <MdOutlineNavigateNext className="text=xl" /> </span>
+          <span className="text-xl"> <NavigateNextIcon className="text=xl" /> </span>
         </div>
       </div>
       <div className="divider my-0 py-0 h-1"></div>
