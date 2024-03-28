@@ -19,9 +19,7 @@ export const sendMessage = async (req, res) => {
             message
         })
 
-        if (!newMessage) {
-            chat.message.push(newMessage._id)
-        }
+        chat.messages.push(newMessage._id)
 
         // using a promise
         await Promise.all([chat.save(), newMessage.save()])
@@ -34,15 +32,16 @@ export const sendMessage = async (req, res) => {
 
 export const receiveMessage = async (req, res) => {
     try {
-        // const { id: userToChatId } = req.body
+        const { id: userToChatId } = req.params
         const senderId = req.user._id
 
-        console.log(req.user)
-        // const chat = await Chat.findOne({ 
-        //     participants: { $all: [senderId, userToChatId] } 
-        // }).populate("messages")
+        // console.log(req.user)
+        const chat = await Chat.findOne({ 
+            participants: { $all: [senderId, userToChatId] } 
+        }).populate("messages")
 
-        // res.status(200).send(chat)
+        res.status(200).json(chat.messages)
+        
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" })
     }

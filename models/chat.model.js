@@ -8,7 +8,7 @@ const ChatSchema = new mongoose.Schema({
         }
     ],
 
-    message: [
+    messages: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Message",
