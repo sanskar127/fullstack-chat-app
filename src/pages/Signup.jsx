@@ -9,11 +9,11 @@ const GenderCheckBox = ({ value, onChange }) => {
       <div className="form-control">
         <label className={`label gap-2 cursor-pointer ${value === 'male' ? "selected" : ""}`}>
           <span className="label-text">Male</span>
-          <input type="checkbox" 
-          className="checkbox 
-          border-slate-900" 
-          checked={value === 'male'}
-          onChange={() => onChange('male')}
+          <input type="checkbox"
+            className="checkbox 
+          border-slate-900"
+            checked={value === 'male'}
+            onChange={() => onChange('male')}
           />
         </label>
       </div>
@@ -21,11 +21,11 @@ const GenderCheckBox = ({ value, onChange }) => {
       <div>
         <label className={`label gap-2 cursor-pointer ${value === 'male' ? "selected" : ""}`}>
           <span className="label-text">Female</span>
-          <input type="checkbox" 
-          className="checkbox 
-          border-slate-900" 
-          checked={value === 'female'}
-          onChange={() => onChange('female')}
+          <input type="checkbox"
+            className="checkbox 
+          border-slate-900"
+            checked={value === 'female'}
+            onChange={() => onChange('female')}
           />
         </label>
       </div>
@@ -117,12 +117,12 @@ const Signup = () => {
               value={input.cpasswd}
             />
 
-            <GenderCheckBox onChange={ handleCheckbox } value={ input.gender } />
+            <GenderCheckBox onChange={handleCheckbox} value={input.gender} />
 
             <Link to='/login' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"> Already have Account? </Link>
 
             <div>
-              <button type="submit" className="btn btn-block btn-sm mt-2">Create Account</button>
+              <button type="submit" className="btn btn-block btn-sm mt-2" disabled={loading}>{loading ? <span className="loading loading-spinner"></span> : "Create Account"}</button>
             </div>
           </div>
         </form>

@@ -3,18 +3,18 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useAuthContext } from "../context/AuthContext"
 
-const useSignup = () => {
+const useLogin = () => {
     const [loading, setLoading] = useState(false)
     const { setAuthUser } = useAuthContext()
 
-    const signup = async (inputs) => {
+    const login = async (inputs) => {
         const success = handleInputError(inputs)
         if (!success) { return }
 
         setLoading(true)
 
         try {
-            const res = await axios.post("http://localhost:5000/api/auth/signup", inputs)
+            const res = await axios.post("http://localhost:5000/api/auth/signin", inputs)
             const data = await res.data
 
             if (data.error) {
@@ -27,7 +27,7 @@ const useSignup = () => {
             // context
             setAuthUser(data)
 
-            toast.success("Account Created Successfully")
+            toast.success("Log in Successfully")
         } catch (error) {
             toast.error(error.message)
         } finally {
@@ -35,21 +35,16 @@ const useSignup = () => {
         }
     }
 
-    return { signup, loading }
+    return { login, loading }
 }
 
-const handleInputError = ({ fullname, uname, passwd, cpasswd, gender }) => {
-    if (!fullname || !uname || !passwd || !cpasswd || !gender) {
+const handleInputError = ({ uname, passwd }) => {
+    if (!uname || !passwd) {
         toast.error("Complete All Input Fields")
-        return false
-    }
-
-    if (passwd !== cpasswd) {
-        toast.error("Passwords do not match")
         return false
     }
 
     return true
 }
 
-export default useSignup
+export default useLogin
