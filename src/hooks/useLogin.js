@@ -1,11 +1,12 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
 import axios from "axios"
-import { useAuthContext } from "../context/AuthContext"
+import { useDispatch } from "react-redux"
+import { setUser } from "../slices/Auth/authSlice"
 
 const useLogin = () => {
     const [loading, setLoading] = useState(false)
-    const { setAuthUser } = useAuthContext()
+    const dispatch = useDispatch()
 
     const login = async (inputs) => {
         const success = handleInputError(inputs)
@@ -24,8 +25,8 @@ const useLogin = () => {
             // localstorage
             localStorage.setItem("chat-app-user", JSON.stringify(data))
 
-            // context
-            setAuthUser(data)
+            // reducer
+            dispatch(setUser(data))
 
             toast.success("Log in Successfully")
         } catch (error) {

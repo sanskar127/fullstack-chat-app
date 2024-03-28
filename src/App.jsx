@@ -1,30 +1,12 @@
 // import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom'
 import { Home, Login, Signup } from "./pages"
 import { Toaster } from 'react-hot-toast'
-import { useAuthContext } from "./context/AuthContext"
+import { useSelector } from "react-redux"
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 const App = () => {
-  const { authUser } = useAuthContext()
-  // const navigate = useNavigate()
-
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     exact: true,
-  //     element: authUser ? <Home /> : navigate("/login"),
-  //   },
-  //   {
-  //     path: "/login",
-  //     exact: true,
-  //     element: authUser ? navigate("/") : <Login />,
-  //   },
-  //   {
-  //     path: "/signup",
-  //     exact: true,
-  //     element: authUser ? navigate("/") : <Signup />,
-  //   },
-  // ])
+  const authUser = useSelector(state => state.auth)
+  console.log(authUser)
   
   return (
     <div className="p-4 h-screen flex items-center justify-center">

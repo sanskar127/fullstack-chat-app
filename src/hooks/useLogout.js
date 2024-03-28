@@ -1,11 +1,12 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
 import axios from "axios"
-import { useAuthContext } from "../context/AuthContext"
+import { useDispatch } from "react-redux"
+import { setUser } from "../slices/Auth/authSlice"
 
 const useLogout = () => {
     const [loading, setLoading] = useState(false)
-    const { setAuthUser } = useAuthContext()
+    const dispatch = useDispatch()
 
     const logout = async () => {
         setLoading(true)
@@ -21,8 +22,8 @@ const useLogout = () => {
             // localstorage
             localStorage.removeItem("chat-app-user")
 
-            // context
-            setAuthUser(null)
+            // reducer
+            dispatch(setUser(null))
 
             toast.success("Logout Successfully")
         } catch (error) {
