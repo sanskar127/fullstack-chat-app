@@ -1,7 +1,6 @@
 import cookieParser from "cookie-parser"
 import express from "express"
 import dotenv from "dotenv"
-import cors from "cors"
 
 import messageRoutes from "./routes/message.routes.js"
 import connectionDB from "./database/connectionDB.js"
@@ -14,7 +13,6 @@ const App = express()
 // Express middleware
 App.use(express.json()) // to parse incoming requests with json payloads
 App.use(cookieParser()) // CookieParser
-// App.use(cors()) // CORS Policy
 
 dotenv.config()
 // Environmental Variables
