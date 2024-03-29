@@ -4,7 +4,7 @@
 
 
 body {
-    background: linear-gradient(to bottom, #1b1b1b 20%, #FFFFFF 20%);
+    background-image: url("./assets/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }

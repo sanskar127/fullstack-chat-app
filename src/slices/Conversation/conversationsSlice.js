@@ -1,14 +1,3 @@
-// import { create } from 'zustand'
-
-// const useConversation = create((set) => ({
-//     selectedConversation: null,
-//     setSelectedConversation: (selectedConversation) => set({selectedConversation}),
-//     messages:[],
-//     setMessages: (messages) => set({messages})
-// }))
-
-// export default useConversation
-
 import { createSlice } from '@reduxjs/toolkit'
 
 export const conversationsSlice = createSlice({
@@ -19,7 +8,7 @@ export const conversationsSlice = createSlice({
     },
     reducers: {
         setSelectedConversation: (state, action) => {
-          state.selectedConversation = action.payload;
+          state.selectedConversation = action.payload
         },
         setMessages: (state, action) => {
           state.messages.push(action.payload)

@@ -1,22 +1,44 @@
+import { PropTypes } from "prop-types"
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
+import { useDispatch, useSelector } from "react-redux"
+import { setSelectedConversation } from "../slices/Conversation/conversationsSlice"
 
-const Conversation = () => {
+const Conversation = ({ conversation, lastIndex }) => {
+  const { _id, fullname, profilePicture } = conversation
+
+  const dispatch = useDispatch()
+  const selectedConversation = useSelector(state => state.conversation.selectedConversation)
+
+  const isSelected = selectedConversation?._id === _id
+
+  const handleClick = () => {
+    dispatch(setSelectedConversation(conversation))
+  }
+
   return (
-    <div className="conversation-item flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer">
+    <div
+      className={`conversation-item flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${isSelected ? "bg-sky-500" : ""}`}
+      onClick={handleClick}
+    >
       <div className="avatar online">
         <div className="avatar-image-wrapper w-12 rounded-full">
-          <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="avatar image" />
+          <img src={profilePicture} alt="DP" />
         </div>
       </div>
       <div className="flex flex-col flex-1">
         <div className="flex gap-3 justify-between">
-          <p className="font-bold text-gray-200">John Doe</p>
-          <span className="text-xl"> <NavigateNextIcon className="text=xl" /> </span>
+          <p className="font-bold text-gray-200">{fullname}</p>
+          <span className="text-xl"><NavigateNextIcon className="text-xl" /></span>
         </div>
       </div>
-      <div className="divider my-0 py-0 h-1"></div>
+      {!lastIndex && <div className="divider my-0 py-0 h-1"></div>}
     </div>
-  );
-};
+  )
+}
 
-export default Conversation;
+Conversation.propTypes = {
+  conversation: PropTypes.object.isRequired,
+  lastIndex: PropTypes.bool.isRequired,
+}
+
+export default Conversation

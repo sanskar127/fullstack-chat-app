@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     input: inputReducer,
-    conversations: conversationsReducer
+    conversation: conversationsReducer
   },
 })
