@@ -15,7 +15,7 @@ const useSignup = () => {
         setLoading(true)
 
         try {
-            const res = await axios.post("http://localhost:5000/api/auth/signup", inputs)
+            const res = await axios.post("/api/auth/signup", inputs)
             const data = await res.data
 
             if (data.error) {
@@ -32,7 +32,7 @@ const useSignup = () => {
         } catch (error) {
             toast.error(error.message)
         } finally {
-            setLoading(true)
+            setLoading(false)
         }
     }
 

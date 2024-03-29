@@ -1,7 +1,8 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
-import { PropTypes } from "prop-types"
+import { PropTypes } from "prop-types" // Import from 'prop-types' instead of 'PropTypes'
 import useSignup from "../hooks/useSignup"
+import { setInput } from "../slices/Auth/inputSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 const GenderCheckBox = ({ value, onChange }) => {
   return (
@@ -9,9 +10,9 @@ const GenderCheckBox = ({ value, onChange }) => {
       <div className="form-control">
         <label className={`label gap-2 cursor-pointer ${value === 'male' ? "selected" : ""}`}>
           <span className="label-text">Male</span>
-          <input type="checkbox"
-            className="checkbox 
-          border-slate-900"
+          <input
+            type="checkbox"
+            className="checkbox border-slate-900"
             checked={value === 'male'}
             onChange={() => onChange('male')}
           />
@@ -19,11 +20,11 @@ const GenderCheckBox = ({ value, onChange }) => {
       </div>
 
       <div>
-        <label className={`label gap-2 cursor-pointer ${value === 'male' ? "selected" : ""}`}>
+        <label className={`label gap-2 cursor-pointer ${value === 'female' ? "selected" : ""}`}>
           <span className="label-text">Female</span>
-          <input type="checkbox"
-            className="checkbox 
-          border-slate-900"
+          <input
+            type="checkbox"
+            className="checkbox border-slate-900"
             checked={value === 'female'}
             onChange={() => onChange('female')}
           />
@@ -39,28 +40,23 @@ GenderCheckBox.propTypes = {
 }
 
 const Signup = () => {
-  const [input, setInput] = useState({
-    fullname: "",
-    uname: "",
-    passwd: "",
-    cpasswd: "",
-    gender: ""
-  })
+  const dispatch = useDispatch()
+  const input = useSelector(state => state.input)
 
-  const { signup, loading } = useSignup()
+  const { loading } = useSignup()
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setInput({ ...input, [name]: value })
+    dispatch(setInput({ [name]: value }))
   }
 
   const handleCheckbox = (gender) => {
-    setInput({ ...input, gender })
+    dispatch(setInput({ gender }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signup(input)
+    console.log(input)
   }
 
   return (
@@ -75,13 +71,14 @@ const Signup = () => {
             <label className="label p-2" htmlFor="fullname">
               <span className="text-base label-text">Fullname</span>
             </label>
-            <input className="w-full input input-bordered h-10"
+            <input
+              className="w-full input input-bordered h-10"
               type="text"
               name="fullname"
               id="fullname"
               placeholder="Murari Lal"
               onChange={handleChange}
-              value={input.fullname}
+              value={input.fullname || ''}
             />
 
             <label className="label p-2" htmlFor="uname">
@@ -91,7 +88,7 @@ const Signup = () => {
               type="text" name="uname"
               id="uname" placeholder="murarilal"
               onChange={handleChange}
-              value={input.uname}
+              value={input.uname || ''}
             />
 
             <label className="label" htmlFor="passwd">
@@ -102,7 +99,7 @@ const Signup = () => {
               id="passwd"
               placeholder="Enter Password"
               onChange={handleChange}
-              value={input.passwd}
+              value={input.passwd || ''}
             />
 
             <label className="label" htmlFor="cpasswd">
@@ -114,10 +111,10 @@ const Signup = () => {
               id="cpasswd"
               placeholder="Confirm Password"
               onChange={handleChange}
-              value={input.cpasswd}
+              value={input.cpasswd || ''}
             />
 
-            <GenderCheckBox onChange={handleCheckbox} value={input.gender} />
+            <GenderCheckBox onChange={handleCheckbox} value={input.gender || ''} />
 
             <Link to='/login' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"> Already have Account? </Link>
 

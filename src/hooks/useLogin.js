@@ -15,24 +15,24 @@ const useLogin = () => {
         setLoading(true)
 
         try {
-            const res = await axios.post("http://localhost:5000/api/auth/signin", inputs)
-            const data = await res.data
+            await axios.post("/api/auth/signin", inputs)
+                .then(res => {
+                    const data = res.data
 
-            if (data.error) {
-                throw new Error(data.error)
-            }
+                    if (data.error) {
+                        throw new Error(data.error)
+                    }
 
-            // localstorage
-            localStorage.setItem("chat-app-user", JSON.stringify(data))
-
-            // reducer
-            dispatch(setUser(data))
+                    // reducer
+                    // dispatch(setUser(data))
+                    dispatch(setUser(data))
+                })
 
             toast.success("Log in Successfully")
         } catch (error) {
             toast.error(error.message)
         } finally {
-            setLoading(true)
+            setLoading(false)
         }
     }
 
