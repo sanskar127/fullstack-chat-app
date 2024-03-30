@@ -1,22 +1,32 @@
+import { useSelector } from "react-redux";
+import { PropTypes } from "prop-types"
+import extractTime from "../utils/extractTime"
 
-const Message = () => {
+const Message = ({ message }) => {
+  // authUser selectedConversation
+  const authUser = useSelector(state => state.auth.user)
+  const selectedConversation = useSelector(state => state.conversation.selectedConversation)
+
+  const me = message.senderId === authUser._id
+  // const chatTo = message.senderId === authUser._id && message.receiverId === selectedConversation
+  const chatClassName = me ? "chat-end" : "chat-start"
+  const bubbleBgColor = me ? "bg-blue-500" : ""
+
+  console.log({
+    senderid: authUser._id,
+    receiverid: me
+  })
+
   return (
-    // <div className="chat chat-end">
-    //   <div className="chat-bubble text-white bg-blue-500">Hello There</div>
-    //   <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">12:42</div>
-    // </div>
-    <>
-      <div className="chat chat-start">
-        <div className="chat-bubble">Its over Anakin, <br />I have the high ground.</div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-bubble text-white bg-blue-500">You underestimate my power!</div>
-        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
-          Seen at 12:46
-        </div>
-      </div>
-    </>
+    <div className={`chat ${chatClassName}`}>
+      <div className={`chat-bubble text-white ${bubbleBgColor}`}>{message.message}</div>
+      <div className="chat-footer opacity-50 text-xs flex gap-1 items-center"> {extractTime(message.createdAt)} </div>
+    </div>
   )
+}
+
+Message.propTypes = {
+  message: PropTypes.array.isRequired,
 }
 
 export default Message

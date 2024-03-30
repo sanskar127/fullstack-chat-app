@@ -43,7 +43,7 @@ const Signup = () => {
   const dispatch = useDispatch()
   const input = useSelector(state => state.input)
 
-  const { loading } = useSignup()
+  const { loading, signup } = useSignup()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -56,7 +56,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(input)
+    await signup(input)
+    dispatch(setInput({}))
   }
 
   return (

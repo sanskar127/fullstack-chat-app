@@ -19,7 +19,7 @@ const NoChatSelected = () => {
 };
 
 const MessageContainer = () => {
-  const { conversations } = useGetConversations();
+  const { conversations } = useGetConversations()
   const dispatch = useDispatch();
   const selectedConversation = useSelector(state => state.conversation.selectedConversation);
 
