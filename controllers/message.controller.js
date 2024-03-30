@@ -26,7 +26,7 @@ export const sendMessage = async (req, res) => {
 
         res.status(201).json(newMessage)
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(500).json({ error: "Can't Send Message" })
     }
 }
 
@@ -43,6 +43,6 @@ export const receiveMessage = async (req, res) => {
         res.status(200).json(chat.messages)
         
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(500).json({ error: "Can't Receive Message" + error.message })
     }
 }
