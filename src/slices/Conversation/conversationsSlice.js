@@ -11,7 +11,7 @@ export const conversationsSlice = createSlice({
           state.selectedConversation = action.payload
         },
         setMessages: (state, action) => {
-          state.messages.push(action.payload)
+          state.messages = action.payload
         },
     }
 })
