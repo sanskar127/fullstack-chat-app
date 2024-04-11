@@ -32,7 +32,7 @@ const useGetMessages = () => {
             }
         }
         if (selectedConversation?._id) { getMessages() }
-    }, [selectedConversation, dispatch])
+    }, [selectedConversation?._id, dispatch])
 
     return { loading, messages }
 }

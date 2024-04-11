@@ -5,17 +5,10 @@ import extractTime from "../utils/extractTime"
 const Message = ({ message }) => {
   // authUser selectedConversation
   const authUser = useSelector(state => state.auth.user)
-  const selectedConversation = useSelector(state => state.conversation.selectedConversation)
 
   const me = message.senderId === authUser._id
-  // const chatTo = message.senderId === authUser._id && message.receiverId === selectedConversation
   const chatClassName = me ? "chat-end" : "chat-start"
   const bubbleBgColor = me ? "bg-blue-500" : ""
-
-  console.log({
-    senderid: authUser._id,
-    receiverid: me
-  })
 
   return (
     <div className={`chat ${chatClassName}`}>
@@ -26,7 +19,7 @@ const Message = ({ message }) => {
 }
 
 Message.propTypes = {
-  message: PropTypes.array.isRequired,
+  message: PropTypes.object.isRequired,
 }
 
 export default Message
