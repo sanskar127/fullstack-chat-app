@@ -3,7 +3,7 @@ import http from "http"
 import express from "express"
 
 const App = express()
-const server = http.createServer(server)
+const server = http.createServer(App)
 const io = new Server(server, {
     cors: {
         origin: ["http://localhost:3000"],
@@ -20,4 +20,4 @@ io.on('connection', socket => {
     })
 })
 
-export { App, io, server }
+export { App, io, server, express }
