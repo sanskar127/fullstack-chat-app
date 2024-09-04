@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
+import useAuth from "../../hooks/useAuth"
 import { useState } from "react"
 
 const Login = () => {
@@ -39,7 +39,12 @@ const Login = () => {
             </label>
             <input className="w-full input input-bordered h-10" type="password" name="passwd" id="passwd" placeholder="Enter Password" onChange={handleChange} value={input.passwd} />
 
-            <Link to='/signup' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"> Create Account </Link>
+            <div className="my-3 text-sm inline-block">
+              {/* <span>No account? </span> */}
+              <Link to="/signup" className="text-blue-600 mt-2">
+                Create An Account
+              </Link>
+            </div>
 
             <div>
               <button type="submit" className="btn btn-block btn-sm mt-2" disabled={signinLoading}>{signinLoading ? <span className="loading loading-spinner"></span> : "Login"}</button>

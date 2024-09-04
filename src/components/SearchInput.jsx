@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setSearch } from "../slices/Conversation/searchSlice"
+import { setSearch } from "../features/Conversation/searchSlice"
 
 const SearchInput = () => {
   const dispatch = useDispatch()

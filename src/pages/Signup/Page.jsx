@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth"
+import useAuth from "../../hooks/useAuth"
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -98,7 +98,7 @@ const Signup = () => {
               <div className="form-control flex-row">
                 <label className="label gap-2 cursor-pointer">
                   <input
-                    className="radio border-slate-900"
+                    className="radio"
                     name="gender"
                     type="radio"
                     value="male"
@@ -109,7 +109,7 @@ const Signup = () => {
                 </label>
                 <label className="label gap-2 cursor-pointer">
                   <input
-                    className="radio border-slate-900"
+                    className="radio"
                     name="gender"
                     type="radio"
                     value="female"
@@ -121,9 +121,12 @@ const Signup = () => {
               </div>
             </div>
 
-            <Link to="/signin" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
-              Already have an account?
-            </Link>
+            <div className="text-sm inline-block">
+              <span>Already have an account? </span>
+              <Link to="/signin" className="text-blue-600 mt-2">
+                Sign in
+              </Link>
+            </div>
 
             <div>
               <button type="submit" className="btn btn-block btn-sm mt-2" disabled={signupLoading}>

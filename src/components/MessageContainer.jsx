@@ -4,7 +4,7 @@ import Messages from "./Messages";
 import MessageIcon from '@mui/icons-material/Message';
 import useGetConversations from "../hooks/useGetConversations";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedConversation } from "../slices/Conversation/conversationsSlice";
+import { setSelectedConversation } from "../features/Conversation/conversationsSlice";
 
 const NoChatSelected = () => {
   const user = useSelector(state => state.auth.user)

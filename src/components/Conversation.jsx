@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types"
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { useDispatch, useSelector } from "react-redux"
-import { setSelectedConversation } from "../slices/Conversation/conversationsSlice"
+import { setSelectedConversation } from "../features/Conversation/conversationsSlice"
 
 const Conversation = ({ conversation, lastIndex }) => {
   const { _id, fullname, profilePicture } = conversation

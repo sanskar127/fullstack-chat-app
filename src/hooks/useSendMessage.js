@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from "react-redux"
-import { setMessages } from '../slices/Conversation/conversationsSlice'
+import { setMessages } from '../features/Conversation/conversationsSlice'
 import { useSendMessageMutation } from '../api/chatApi'
 
 const useSendMessage = () => {

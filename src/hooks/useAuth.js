@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 import { useDispatch } from "react-redux"
-import { setUser } from "../slices/Auth/authSlice"
+import { setUser } from "../features/Auth/authSlice"
 import { useSigninMutation, useSignoutMutation, useSignupMutation } from "../api/authApi"
 
 const useAuth = () => {
