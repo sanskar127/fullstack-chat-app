@@ -2,7 +2,6 @@ import { Home, Signin, Signup } from "./pages"
 import { Toaster } from 'react-hot-toast'
 import { useSelector } from "react-redux"
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Test from "./components/Test"
 import { useEffect, useState } from "react"
 import io from "socket.io-client"
 // import { setSocket, setOnlineUsers } from "./slices/Socket/socketSlice"
@@ -32,7 +31,6 @@ const App = () => {
         <Route path="/" element={authUser ? <Home /> : <Navigate to={"/login"} />} />
         <Route path="/login" element={authUser ? <Navigate to={"/"} /> : <Signin />} />
         <Route path="/signup" element={authUser ? <Navigate to={"/"} /> : <Signup />} />
-        <Route path="/test" element={<Test />} />
       </Routes>
       <Toaster />
     </div>

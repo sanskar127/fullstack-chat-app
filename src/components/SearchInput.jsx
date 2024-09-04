@@ -1,37 +1,13 @@
-import { useState } from 'react'
-// import SearchIcon from '@mui/icons-material/Search'
-import { useDispatch } from "react-redux"
-import { setSelectedConversation } from "../slices/Conversation/conversationsSlice"
-import useGetConversation from "../hooks/useGetConversations"
-import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from "react-redux"
+import { setSearch } from "../slices/Conversation/searchSlice"
 
 const SearchInput = () => {
-  const [search, setSearch] = useState("")
-  // useSetConversation
   const dispatch = useDispatch()
-  const { conversations } = useGetConversation()
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    if (!search) { return }
-    if (search.length <= 0) {
-      return toast.error("Search: Atleast 3 characters required")
-    }
-
-    const conversation = conversations.find(c => c.fullname.toLowerCase())
-
-    if (conversation) {
-      dispatch(setSelectedConversation(conversation))
-      setSearch("")
-    } else { toast.error("Search: User Not Found!") }
-  }
+  const search = useSelector(state => state.search.value)
 
   return (
-    <form className="flex items-center gap-2" onSubmit={handleSubmit}>
-      <input type="text" placeholder="Search" className="input input-bordered rounded-full" value={search} onChange={e => setSearch(e.target.value)} />
-      {/* <button type="submit" className="btn btn-circle bg-sky-500 text-white">
-        <SearchIcon className="w-5 h-5 outline-none" />
-      </button> */}
+    <form className="flex items-center gap-2">
+      <input type="text" placeholder="Search" className=" flex-1 input input-bordered rounded-full" value={search}  onChange={e => dispatch(setSearch(e.target.value))} />
     </form>
   )
 }
