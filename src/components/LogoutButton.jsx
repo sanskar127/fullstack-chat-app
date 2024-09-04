@@ -1,5 +1,5 @@
 import LogoutIcon from '@mui/icons-material/Logout'
-import { useAuth } from "../hooks/index"
+import useAuth from "../hooks/useAuth"
 
 const LogoutButton = () => {
   const { SignOutHandler, signoutLoading } = useAuth()

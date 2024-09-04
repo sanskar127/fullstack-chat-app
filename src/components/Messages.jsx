@@ -1,10 +1,8 @@
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
-// import { useEffect, useRef } from "react";
 
 const Messages = () => {
   const { loading, messages } = useGetMessages()
-  // const lastMessageRef = useRef()
 
   return (
     <div className="px-4 flex-1 overflow-auto">

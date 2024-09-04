@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useAuth } from "../hooks/index"
+import useAuth from "../hooks/useAuth"
 import { useState } from "react"
 
 const Login = () => {

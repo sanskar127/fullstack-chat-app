@@ -1,38 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import toast from "react-hot-toast"
-import axios from "axios"
+import { useGetUsersQuery } from "../api/chatApi"
 
 const useGetConversations = () => {
-    const [loading, setLoading] = useState(false)
-    const [conversations, setConversations] = useState([])
+    const { data: conversations = [], error, isLoading } = useGetUsersQuery()
 
     useEffect(() => {
-        const getConversations = async () => {
-            setLoading(true)
+        if (error) { toast.error(error.message) }
+    }, [error])
 
-            try {
-                await axios.get("/api/users")
-                .then(res => {
-                    const data = res.data
-    
-                    if (data.error) {
-                        throw new Error(data.error)
-                    }
-    
-                    setConversations(data)
-                })
-                
-            } catch (error) {
-                toast.error(error.message)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        getConversations()
-    }, [])
-
-    return { conversations, loading }
+    return { conversations, isLoading }
 }
 
 export default useGetConversations

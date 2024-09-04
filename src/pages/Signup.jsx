@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/index"
+import useAuth from "../hooks/useAuth"
 
 const Signup = () => {
   const [input, setInput] = useState({

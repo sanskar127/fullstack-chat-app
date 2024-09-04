@@ -16,7 +16,7 @@ export const chatApi = createApi({
       }),
     }),
     getUsers: builder.query({
-      query: () => 'users/',
+      query: () => '/users',
     }),
   }),
 })
