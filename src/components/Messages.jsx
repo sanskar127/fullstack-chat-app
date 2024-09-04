@@ -6,14 +6,6 @@ const Messages = () => {
   const { loading, messages } = useGetMessages()
   // const lastMessageRef = useRef()
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     lastMessageRef.current?.scrollIntoView({ behaviour: "smooth" })
-  //   }, 50);
-  // }, [messages])
-
-  console.log(messages);
-
   return (
     <div className="px-4 flex-1 overflow-auto">
       <div className="space-y-4">

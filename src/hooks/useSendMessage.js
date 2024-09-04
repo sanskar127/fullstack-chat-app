@@ -1,35 +1,29 @@
-import axios from 'axios'
 import toast from 'react-hot-toast'
-import { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { setMessages } from '../slices/Conversation/conversationsSlice'
+import { useSendMessageMutation } from '../api/chatApi'
 
 const useSendMessage = () => {
-    const [loading, setLoading] = useState(false)
+    const [sendMessage, { isLoading, isError, error }] = useSendMessageMutation()
 
     // messages setMessages selected Conversations
     const dispatch = useDispatch()
     const selectedConversation = useSelector(state => state.conversation.selectedConversation)
 
-    const sendMessage = async (message) => {
-        setLoading(true)
+    const handler = async (message) => {
 
         try {
-            await axios.post(`/api/message/send/${selectedConversation._id}`, message)
-                .then(res => {
-                    const data = res.data
+            const response = await sendMessage({ conversationId: selectedConversation._id, message }).unwrap()
 
-                    if (data.error) { throw new Error(data.error) }
-                    dispatch(setMessages(data))
-                })
-        } catch (error) {
-            toast.error(error.message)
-        } finally {
-            setLoading(false)
+            if (response) { dispatch(setMessages(response)) }
+            if (isError) { throw new Error(error) }
+
+        } catch (e) {
+            toast.error(e.message)
         }
     }
 
-    return { sendMessage, loading }
+    return { handler, isLoading }
 }
 
 export default useSendMessage

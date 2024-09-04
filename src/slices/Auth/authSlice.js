@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: JSON.parse(localStorage.getItem("chat-app-user")) || null,
+        user: JSON.parse(localStorage.getItem("user")) || null,
     },
     reducers: {
         setUser: (state, action) => {

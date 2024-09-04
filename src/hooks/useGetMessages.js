@@ -1,40 +1,19 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux"
-import { setMessages } from '../slices/Conversation/conversationsSlice'
-import toast from 'react-hot-toast'
-import axios from 'axios'
+// hooks/useGetMessages.js
+import { useSelector } from 'react-redux';
+import { useGetMessagesQuery } from '../api/chatApi';
+import toast from 'react-hot-toast';
 
 const useGetMessages = () => {
-    const [loading, setLoading] = useState(false)
+  const selectedConversation = useSelector(state => state.conversation.selectedConversation);
 
-    // messages setmessages selectedconversations
-    const dispatch = useDispatch()
-    const messages = useSelector(state => state.conversation.messages)
-    const selectedConversation = useSelector(state => state.conversation.selectedConversation)
+  const { data: messages = [], isLoading } = useGetMessagesQuery(selectedConversation?._id, {
+    skip: !selectedConversation?._id,
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
-    useEffect(() => {
-        const getMessages = async () => {
-            setLoading(true)
-    
-            try {
-                await axios.get(`/api/message/${selectedConversation._id}`)
-                .then(res => {
-                    const data = res.data
+  return { messages, isLoading };
+};
 
-                    if (data.error) { throw new Error(data.error) }
-
-                     dispatch(setMessages(data))
-                })
-            } catch (error) {
-                toast.error(error.message)
-            } finally {
-                setLoading(false)
-            }
-        }
-        if (selectedConversation?._id) { getMessages() }
-    }, [selectedConversation?._id, dispatch])
-
-    return { loading, messages }
-}
-
-export default useGetMessages
+export default useGetMessages;
