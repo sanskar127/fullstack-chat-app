@@ -4,22 +4,22 @@ import { setUser } from "../slices/Auth/authSlice"
 import { useSignoutMutation } from "../api/authApi"
 
 const useLogout = () => {
-    const [signout, { isSuccess, isError, isLoading, error }] = useSignoutMutation()
+    const [signout, { isLoading }] = useSignoutMutation()
     const dispatch = useDispatch()
 
     const handler = async () => {
 
         try {
-            await signout()
+            const response = await signout().unwrap()
 
-            if (isSuccess) {
+            if (response) {
                 dispatch(setUser(null))
                 // localstorage
                 localStorage.removeItem("user")
                 toast.success("Signout Successfully")
             }
 
-            if (isError) { throw new Error(error) }
+            // if (isError) { throw new Error(error) }
 
         } catch (e) {
             toast.error("Sign in failed!")

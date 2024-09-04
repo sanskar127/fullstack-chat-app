@@ -4,23 +4,23 @@ import { setUser } from "../slices/Auth/authSlice"
 import { useSignupMutation } from "../api/authApi"
 
 const useSignup = () => {
-    const [signup, { data, isSuccess, isError, isLoading, error }] = useSignupMutation()
+    const [signup, { isLoading, }] = useSignupMutation()
     const dispatch = useDispatch()
 
     const handler = async (inputs) => {
         if (!handleInputError(inputs)) { return }
 
         try {
-            await signup(inputs)
+            const response = await signup(inputs).unwrap()
 
-            if (isSuccess) {
-                dispatch(setUser(data))
+            if (response) {
+                dispatch(setUser(response))
                 // localstorage
-                localStorage.setItem("user", JSON.stringify(data))
+                localStorage.setItem("user", JSON.stringify(response))
                 toast.success("Account Created Successfully")
             }
 
-            if (isError) { throw new Error(error) }
+            // if (isError) { throw new Error(error) }
 
         } catch (e) {
             toast.error("Sign in failed!")

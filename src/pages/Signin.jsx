@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setInput({ ...input, [name]: value })
+    setInput(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -32,12 +32,12 @@ const Login = () => {
             <label className="label p-2" htmlFor="uname">
               <span className="text-base label-text">Username</span>
             </label>
-            <input className="w-full input input-bordered h-10" type="text" name="uname" id="uname" placeholder="Enter Username" onChange={handleChange} value={input.uname || ''} />
+            <input className="w-full input input-bordered h-10" type="text" name="uname" id="uname" placeholder="Enter Username" onChange={handleChange} value={input.uname} />
 
             <label className="label" htmlFor="passwd">
               <span className="text-base label-text">Password</span>
             </label>
-            <input className="w-full input input-bordered h-10" type="password" name="passwd" id="passwd" placeholder="Enter Password" onChange={handleChange} value={input.passwd || ''} />
+            <input className="w-full input input-bordered h-10" type="password" name="passwd" id="passwd" placeholder="Enter Password" onChange={handleChange} value={input.passwd} />
 
             <Link to='/signup' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"> Create Account </Link>
 

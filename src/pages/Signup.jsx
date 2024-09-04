@@ -15,7 +15,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInput((prevInput) => ({
+    setInput(prevInput => ({
       ...prevInput,
       [name]: value,
     }));
@@ -121,7 +121,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <Link to="/login" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+            <Link to="/signin" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
               Already have an account?
             </Link>
 

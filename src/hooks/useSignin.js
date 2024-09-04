@@ -3,28 +3,24 @@ import { useDispatch } from "react-redux"
 import { setUser } from "../slices/Auth/authSlice"
 import { useSigninMutation } from "../api/authApi"
 
-const useLogin = () => {
-    const [signin, { data, isSuccess, isError, isLoading, error }] = useSigninMutation()
+const useSignin = () => {
+    const [signin, { isLoading }] = useSigninMutation()
     const dispatch = useDispatch()
 
     const handler = async (inputs) => {
         if (!handleInputError(inputs)) { return }
 
         try {
-            await signin(inputs)
+            const response = await signin(inputs).unwrap(); // Use unwrap() to get the resolved value directly
 
-            if (isSuccess) {
-                dispatch(setUser(data))
-                // localstorage
-                localStorage.setItem("user", JSON.stringify(data))
+            if (response) {
+                dispatch(setUser(response))
+                localStorage.setItem("user", JSON.stringify(response))
                 const userName = inputs.uname
                 toast.success(`${userName} signed in Successfully`)
             }
-
-            if (isError) { throw new Error(error) }
-
         } catch (e) {
-            toast.error("Sign in failed!")
+            toast.error(e.message || "Sign in failed!")
         }
     }
 
@@ -40,4 +36,4 @@ const handleInputError = ({ uname, passwd }) => {
     return true
 }
 
-export default useLogin
+export default useSignin
