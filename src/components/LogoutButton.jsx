@@ -1,12 +1,12 @@
 import LogoutIcon from '@mui/icons-material/Logout'
-import useLogout from "../hooks/useLogout"
+import { useSignout } from "../hooks/index"
 
 const LogoutButton = () => {
-  const { logout, loading } = useLogout()
+  const { handler, isLoading } = useSignout()
   return (
     <div className="mt-auto">
-      {!loading ? (
-        <LogoutIcon className="w-6 h-6 text-white cursor-pointer" onClick={logout} />
+      {!isLoading ? (
+        <LogoutIcon className="w-6 h-6 text-white cursor-pointer" onClick={handler} />
       ) : (
         <span className='loading loading-spinner'></span>
       )}

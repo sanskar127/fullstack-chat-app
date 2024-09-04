@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SearchIcon from '@mui/icons-material/Search'
+// import SearchIcon from '@mui/icons-material/Search'
 import { useDispatch } from "react-redux"
 import { setSelectedConversation } from "../slices/Conversation/conversationsSlice"
 import useGetConversation from "../hooks/useGetConversations"
@@ -29,9 +29,9 @@ const SearchInput = () => {
   return (
     <form className="flex items-center gap-2" onSubmit={handleSubmit}>
       <input type="text" placeholder="Search" className="input input-bordered rounded-full" value={search} onChange={e => setSearch(e.target.value)} />
-      <button type="submit" className="btn btn-circle bg-sky-500 text-white">
+      {/* <button type="submit" className="btn btn-circle bg-sky-500 text-white">
         <SearchIcon className="w-5 h-5 outline-none" />
-      </button>
+      </button> */}
     </form>
   )
 }
