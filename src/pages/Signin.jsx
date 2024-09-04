@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useSignin } from "../hooks/index"
+import { useAuth } from "../hooks/index"
 import { useState } from "react"
 
 const Login = () => {
@@ -8,7 +8,7 @@ const Login = () => {
     passwd: ""
   })
 
-  const { handler, isLoading } = useSignin()
+  const { SignInHandler, signinLoading } = useAuth()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await handler(input)
+    await SignInHandler(input)
   }
 
   return (
@@ -42,7 +42,7 @@ const Login = () => {
             <Link to='/signup' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"> Create Account </Link>
 
             <div>
-              <button type="submit" className="btn btn-block btn-sm mt-2" disabled={isLoading}>{isLoading ? <span className="loading loading-spinner"></span> : "Login"}</button>
+              <button type="submit" className="btn btn-block btn-sm mt-2" disabled={signinLoading}>{signinLoading ? <span className="loading loading-spinner"></span> : "Login"}</button>
             </div>
           </div>
         </form>

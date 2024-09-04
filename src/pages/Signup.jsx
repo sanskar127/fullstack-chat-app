@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSignup } from "../hooks/index"
+import { useAuth } from "../hooks/index"
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -11,7 +11,7 @@ const Signup = () => {
     gender: "",
   });
 
-  const { loading, signup } = useSignup();
+  const { SignUpHandler, signupLoading } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(input);
+    await SignUpHandler(input);
     setInput({
       fullname: "",
       uname: "",
@@ -126,8 +126,8 @@ const Signup = () => {
             </Link>
 
             <div>
-              <button type="submit" className="btn btn-block btn-sm mt-2" disabled={loading}>
-                {loading ? <span className="loading loading-spinner"></span> : "Create Account"}
+              <button type="submit" className="btn btn-block btn-sm mt-2" disabled={signupLoading}>
+                {signupLoading ? <span className="loading loading-spinner"></span> : "Create Account"}
               </button>
             </div>
           </div>
