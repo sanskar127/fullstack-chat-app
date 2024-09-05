@@ -1,8 +1,9 @@
-import { App, server, express } from "./socket/socket.js"
+// import { App, server, express } from "./socket/socket.js"
 import cookieParser from "cookie-parser"
+import { fileURLToPath } from "url"
+import express from "express"
 import dotenv from "dotenv"
 import path from "path"
-import { fileURLToPath } from "url"
 
 import messageRoutes from "./routes/message.routes.js"
 import connectionDB from "./database/connectionDB.js"
@@ -12,6 +13,7 @@ import userRoutes from "./routes/user.routes.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const App = express()
 // Express middleware
 App.use(express.json()) // to parse incoming requests with json payloads
 App.use(cookieParser()) // CookieParser
@@ -32,7 +34,7 @@ App.post('/api/test', (req, res) => {
 })
 
 // Starting Server
-server.listen(PORT, () => {
+App.listen(PORT, () => {
     connectionDB()
     console.log(`Live on http://localhost:${PORT}`)
 })
