@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    socket: "",
+    socket: null,
     onlineUsers: []
 }
 
@@ -13,7 +13,7 @@ export const socketSlice = createSlice({
             state.socket = action.payload
         },
         setOnlineUsers: (state, action) => {
-            state.onlineUsers.push(action.payload)
+            state.onlineUsers = action.payload
         }
     }
 })

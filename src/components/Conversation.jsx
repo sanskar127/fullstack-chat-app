@@ -8,6 +8,8 @@ const Conversation = ({ conversation, lastIndex }) => {
 
   const dispatch = useDispatch()
   const selectedConversation = useSelector(state => state.conversation.selectedConversation)
+  const onlineUsers = useSelector(state => state.socket.onlineUsers)
+  const isOnline = onlineUsers.includes(conversation._id)
 
   const isSelected = selectedConversation?._id === _id
 
@@ -20,7 +22,7 @@ const Conversation = ({ conversation, lastIndex }) => {
       className={`conversation-item flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${isSelected ? "bg-sky-500" : ""}`}
       onClick={handleClick}
     >
-      <div className="avatar">
+      <div className={`avatar ${isOnline ? "online": ""}`}>
         <div className="avatar-image-wrapper w-12 rounded-full">
           <img src={profilePicture} alt="DP" />
         </div>
