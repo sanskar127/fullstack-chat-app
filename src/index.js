@@ -2,6 +2,7 @@ import { App, server, express } from "./socket/socket.js"
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 import path from "path"
+import cors from "cors"
 import { fileURLToPath } from "url"
 
 import messageRoutes from "./routes/message.routes.js"
@@ -25,11 +26,6 @@ const PORT = process.env.PORT
 App.use('/api/auth', authRoutes)
 App.use('/api/message', messageRoutes)
 App.use("/api/users", userRoutes)
-App.post('/api/test', (req, res) => {
-    const { message } = req.body
-    res.json({ message: message })
-    console.log(message)
-})
 
 // Starting Server
 server.listen(PORT, () => {
