@@ -1,12 +1,9 @@
 import mongoose from "mongoose"
 
-const connectionDB = async () => {
+const connectionDB = () => {
     const url = process.env.MONGODB_URI + "/chatapp"
     try {
-        await mongoose.connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        mongoose.connect(url);
         console.log("Database connected successfully");
     } catch (error) {
         console.log("Error while connecting to the database", error);

@@ -27,7 +27,7 @@ App.use('/api/message', messageRoutes)
 App.use("/api/users", userRoutes)
 
 // Starting Server
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
     connectionDB()
     console.log(`Live on PORT ${PORT}`)
 })
