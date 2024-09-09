@@ -19,9 +19,12 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
+    "netlify-cli": "^17.35.0",
+    "serverless-http": "^3.2.0",
     "socket.io": "^4.7.4"
   },
   "devDependencies": {
+    "netlify-lambda": "^2.0.16",
     "nodemon": "^3.0.3"
   }
 }
