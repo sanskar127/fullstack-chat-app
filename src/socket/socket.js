@@ -1,5 +1,5 @@
 import { Server } from "socket.io"
-import { createServer } from "http"
+import { createServer } from "https"
 import express from "express"
 
 const App = express()
