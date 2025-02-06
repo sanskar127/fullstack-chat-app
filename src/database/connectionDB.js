@@ -1,16 +1,12 @@
 import mongoose from "mongoose"
 
-const connectionDB = () => {
-    const url = process.env.MONGODB_URI + "/chatapp"
+const connectionDB = async () => {
     try {
-        mongoose.connect(url);
-        console.log("Database connected successfully");
+        await mongoose.connect(process.env.MONGODB_URI + "/chatapp")
+        // console.log("Connected to DB Successfully")
     } catch (error) {
-        console.log("Error while connecting to the database", error);
+        // console.log(error.message)
     }
-    // await mongoose.connect(process.env.MONGODB_URI + "/chatapp")
-    // .then(() => console.log("Connected to DB Successfully ", process.env.MONGODB_URI, " on port:", process.env.PORT ))
-    // .catch(err => console.error('MongoDB connection error:', err))
 }
 
 export default connectionDB
