@@ -1,0 +1,8 @@
+[build]
+  command = "npm start"
+  publish = "."
+
+[context.production.environment]
+  PORT = "3000"
+  MONGODB_URI = "mongodb+srv://root:sanskar1234567@database.gxlak.mongodb.net"
+  JWT_SECRET = "96)kw1t58y#q7(n7a*+!e=hpm*^6jhb1y#(6lo%7!=-q(((-54"
